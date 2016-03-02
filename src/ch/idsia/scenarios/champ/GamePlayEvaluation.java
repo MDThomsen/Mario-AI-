@@ -9,6 +9,7 @@ import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.CmdLineOptions;
 import ch.idsia.tools.EvaluationInfo;
 import ch.idsia.utils.StatisticalSummary;
+import superAgent.MarioAI;
 
 
 /**
@@ -39,21 +40,24 @@ public final class GamePlayEvaluation
 
         int levelLength = cmdLineOptions.getLevelLength();
 
-        final int[] timeLimits = new int[]{levelLength / 10,
+        final int[] timeLimits = new int[]{levelLength*6 / 10,
                 levelLength * 2 / 10,
                 levelLength * 4 / 10};
 
         final int[] levelDifficulties = new int[]{0, 1, 2, 3, 4, 5, 6, 12, 16, 20};
         final int[] levelTypes = new int[]{0, 1, 2};
         final int[] levelLengths = new int[]{320, 320, 320, 320, 320, 320};
-        final boolean[] creaturesEnables = new boolean[]{false, true};
+        final boolean[] creaturesEnables = new boolean[]{true, true};
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
-        cmdLineOptions.setLevelRandSeed(6189642);
+//        cmdLineOptions.setLevelRandSeed(6189642);
+        int seed = (int) (Math.random() * 1000000);
+        cmdLineOptions.setLevelRandSeed(seed);
+        System.out.println(seed);
 
 //        final Environment environment = new MarioEnvironment();
-        final Agent agent = new ForwardJumpingAgent();
+        final Agent agent = new MarioAI("SuperAgent");
 //        final Agent agent = cmdLineOptions.getAgent();
 //        final Agent agent = (SimpleCNAgent) Easy.load("sergeypolikarpov.xml");
 //        System.out.println("agent = " + agent);
