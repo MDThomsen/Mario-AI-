@@ -2,7 +2,7 @@ package ch.idsia.scenarios.champ;
 
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.AgentsPool;
-import ch.idsia.agents.controllers.ForwardJumpingAgent;
+import ch.idsia.agents.controllers.TestAI;
 import ch.idsia.agents.controllers.TimingAgent;
 import ch.idsia.benchmark.mario.simulation.SimulationOptions;
 import ch.idsia.benchmark.tasks.BasicTask;
@@ -46,14 +46,15 @@ public final class GamePlayEvaluation
         final int[] levelDifficulties = new int[]{0, 1, 2, 3, 4, 5, 6, 12, 16, 20};
         final int[] levelTypes = new int[]{0, 1, 2};
         final int[] levelLengths = new int[]{320, 320, 320, 320, 320, 320};
-        final boolean[] creaturesEnables = new boolean[]{false, true};
+        final boolean[] creaturesEnables = new boolean[]{true};
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
-        cmdLineOptions.setLevelRandSeed(6189642);
+        int seed = (int) (1000000*Math.random());
+        cmdLineOptions.setLevelRandSeed(seed);
 
 //        final Environment environment = new MarioEnvironment();
-        final Agent agent = new ForwardJumpingAgent();
+        final Agent agent = new TestAI();
 //        final Agent agent = cmdLineOptions.getAgent();
 //        final Agent agent = (SimpleCNAgent) Easy.load("sergeypolikarpov.xml");
 //        System.out.println("agent = " + agent);
@@ -81,6 +82,7 @@ public final class GamePlayEvaluation
                             cmdLineOptions.setPauseWorld(!creaturesEnable);
                             cmdLineOptions.setTimeLimit(timeLimit);
                             basicTask.reset(cmdLineOptions);
+                            System.out.println(seed);
                             if (!basicTask.runOneEpisode())
                             {
                                 System.out.println("[MarioAI Evaluation] : out of computational time per action!");
