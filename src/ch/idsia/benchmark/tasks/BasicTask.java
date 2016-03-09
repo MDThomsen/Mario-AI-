@@ -41,12 +41,33 @@ public boolean runOneEpisode()
 
             boolean[] action = agent.getAction();
             environment.performAction(action);
+            //printArray(environment.getMergedObservationZZ(1, 0));
         }
     }
     environment.closeRecorder();
     environment.getEvaluationInfo().setTaskName(name);
     return true;
 }
+public void printArray(byte[][] array) {
+	String s = "";
+	for (int i = 0; i< array[0].length; i++) {
+		s += "\n";
+		for(int j = 0; j < array.length; j++) {
+			s += formatString(" " + array[i][j]);
+		}
+	}
+	System.out.println(s);
+}
+	private String formatString(String s) {
+		int length = s.length();
+		while (length < 4) {
+			s += " ";
+			length = s.length();
+		}
+		return s;
+	}
+	
+
 
 public void reset(CmdLineOptions cmdLineOptions)
 {

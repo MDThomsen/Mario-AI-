@@ -151,4 +151,27 @@ public int getReceptiveFieldCellValue(int x, int y)
 //        getKillsByStomp = marioState[8];
 //        getKillsByShell = marioState[9];
 //    }
+	public void printArray(byte[][] array) {
+		String s = "";
+		for (int i = 0; i< array[0].length; i++) {
+			s += "\n";
+			for(int j = 0; j < array.length; j++) {
+				s += formatString(" " + array[i][j]);
+			}
+		}
+		System.out.println(s);
+		
+	}
+	
+	private String formatString(String s) {
+		int length = s.length();
+		while (length < 4) {
+			s += " ";
+			length = s.length();
+		}
+		return s;
+		
+	}
+
+
 }

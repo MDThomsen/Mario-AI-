@@ -1,5 +1,4 @@
 package ch.idsia.scenarios.champ;
-
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.AgentsPool;
 import ch.idsia.agents.controllers.ForwardJumpingAgent;
@@ -15,21 +14,11 @@ import ch.idsia.tools.CmdLineOptions;
 import ch.idsia.tools.EvaluationInfo;
 import ch.idsia.utils.StatisticalSummary;
 
+public class AgentRunner {
 
-/**
- * Created by IntelliJ IDEA.
- * User: Sergey Karakovskiy, sergey at idsia dot ch
- * Date: Mar 17, 2010 Time: 8:33:43 AM
- * Package: ch.idsia.scenarios
- */
 
-/**
- * Class used for agent evaluation on GamePlay track
- * www.marioai.org/gameplay-track
- */
 
-public final class GamePlayEvaluation
-{
+
     final static int numberOfTrials = 10;
     final static boolean scoring = false;
     private static int killsSum = 0;
@@ -48,10 +37,10 @@ public final class GamePlayEvaluation
                 levelLength * 2 / 10,
                 levelLength * 4 / 10};
 
-        final int[] levelDifficulties = new int[]{ 1, 3, 4, 5, 6, 12, 16, 20};
-        final int[] levelTypes = new int[]{0};
+        final int[] levelDifficulties = new int[]{0, 1, 2, 3, 4, 5, 6, 12, 16, 20};
+        final int[] levelTypes = new int[]{0, 1, 2};
         final int[] levelLengths = new int[]{320, 320, 320, 320, 320, 320};
-        final boolean[] creaturesEnables = new boolean[]{false};
+        final boolean[] creaturesEnables = new boolean[]{false, true};
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
@@ -78,12 +67,14 @@ public final class GamePlayEvaluation
                 {
                     for (boolean creaturesEnable : creaturesEnables)
                     {
+                        for (int timeLimit : timeLimits)
+                        {
                             trials++;
-                            cmdLineOptions.setLevelLength(320);
+                            cmdLineOptions.setLevelLength(ll);
                             cmdLineOptions.setLevelDifficulty(levelDifficulty);
                             cmdLineOptions.setLevelType(levelType);
                             cmdLineOptions.setPauseWorld(!creaturesEnable);
-                            cmdLineOptions.setTimeLimit(60);
+                            cmdLineOptions.setTimeLimit(timeLimit);
                             basicTask.reset(cmdLineOptions);
                             if (!basicTask.runOneEpisode())
                             {
@@ -93,9 +84,14 @@ public final class GamePlayEvaluation
                             }
                             EvaluationInfo evaluationInfo = basicTask.getEnvironment().getEvaluationInfo();
                             float f = evaluationInfo.computeWeightedFitness();
-                          
+                            if (verbose)
+                            {
+                                System.out.println("LEVEL OPTIONS: -ld " + levelDifficulty + " -lt " + levelType + " -pw " + !creaturesEnable +
+                                        " -tl " + timeLimit);
+                                System.out.println("Intermediate SCORE = " + f + "; Details: " + evaluationInfo.toStringSingleLine());
+                            }
                             fitness += f;
-                       
+                        }
                     }
                 }
             }

@@ -47,6 +47,8 @@ public static void main(String[] args)
     final CmdLineOptions cmdLineOptions = new CmdLineOptions(args);
     final BasicTask basicTask = new BasicTask(cmdLineOptions);
     cmdLineOptions.setVisualization(true);
+    cmdLineOptions.setLevelDifficulty(3);
+    cmdLineOptions.setPauseWorld(true);
 //        basicTask.reset(cmdLineOptions);
     final MarioCustomSystemOfValues m = new MarioCustomSystemOfValues();
 //        basicTask.runOneEpisode();
