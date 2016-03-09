@@ -4,22 +4,19 @@ package test;
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.controllers.BasicMarioAIAgent;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
-import graphGenerate.Node;
-import graphGenerate.TestGenerate;
+import datastructures.Graph;
 
 public class MarioAI extends BasicMarioAIAgent implements Agent {
 	
 	float prevFloatPosX;
 	private int iteration;
 	private int prevLength;
-	private TestGenerate tg;
 
 	public MarioAI(String s) {
 		super(s);
 		prevFloatPosX = 0;
 		iteration = 0;
 		prevLength = 0;
-		tg = new TestGenerate(19/2,19/2);
 	}
 	
 	@Override
@@ -29,8 +26,6 @@ public class MarioAI extends BasicMarioAIAgent implements Agent {
 			
 			if((int) marioFloatPos[0]/16 != prevLength) {
 				
-				tg.generateGraph(mergedObservation);
-				tg.printGraph(tg.getStartNode());
 				//printWorld();
 			}
 			prevLength = (int) marioFloatPos[0]/16;
