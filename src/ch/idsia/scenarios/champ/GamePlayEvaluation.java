@@ -2,7 +2,6 @@ package ch.idsia.scenarios.champ;
 
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.AgentsPool;
-import ch.idsia.agents.controllers.ForwardJumpingAgent;
 import ch.idsia.agents.controllers.TimingAgent;
 import ch.idsia.benchmark.mario.simulation.SimulationOptions;
 import ch.idsia.benchmark.tasks.BasicTask;
@@ -40,7 +39,7 @@ public final class GamePlayEvaluation
 
         int levelLength = cmdLineOptions.getLevelLength();
 
-        final int[] timeLimits = new int[]{levelLength*6 / 10,
+        final int[] timeLimits = new int[]{levelLength,
                 levelLength * 2 / 10,
                 levelLength * 4 / 10};
 
@@ -51,8 +50,7 @@ public final class GamePlayEvaluation
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
-//        cmdLineOptions.setLevelRandSeed(6189642);
-        int seed = (int) (Math.random() * 1000000);
+        int seed = (int) (1000000*Math.random());
 //        int seed = 970836;
         cmdLineOptions.setLevelRandSeed(seed);
 
@@ -86,6 +84,7 @@ public final class GamePlayEvaluation
                             cmdLineOptions.setPauseWorld(!creaturesEnable);
                             cmdLineOptions.setTimeLimit(timeLimit);
                             basicTask.reset(cmdLineOptions);
+                            System.out.println(seed);
                             if (!basicTask.runOneEpisode())
                             {
                                 System.out.println("[MarioAI Evaluation] : out of computational time per action!");
