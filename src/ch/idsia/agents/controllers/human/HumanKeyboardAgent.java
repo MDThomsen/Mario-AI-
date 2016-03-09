@@ -86,9 +86,11 @@ public class HumanKeyboardAgent extends KeyAdapter implements Agent {
 			counter++;
 		}
 		if(hasMoved(prevXpos,prevYpos) && counter > limit) {
-			System.out.println("printing");
 			g.expandFrontier(levelScene, Math.abs((int) marioFloatPos[0]/16 - startX),(int) marioFloatPos[1]/16 - startY);
-			//g.printGraph();
+			g.printArrayWithNodes(levelScene, Math.abs((int) marioFloatPos[0]/16 - startX), (int) marioFloatPos[1]/16 - startY);
+			System.out.println();
+			g.printArray(levelScene);
+			g.printGraph();
 		}
 
 		prevXpos=(int) marioFloatPos[0]/16;

@@ -81,23 +81,7 @@ public class Graph {
 	}
 
 	public void expandFrontier(byte[][] world, int distanceTraveled, int deltaHeightFromStart) {
-		for (int i = 0; i < world.length; i++) {
-			for (int j = 0; j < world[0].length; j++) {
-				boolean node = false;
-				for (Node n : nodes) {
-					if (n.getRow() - deltaHeightFromStart == i && n.getCol() - distanceTraveled + 1 == j) {
-						node = true;
-						break;
-					}
-				}
-				if (node) {
-					System.out.printf("%3c", 'N');
-				} else {
-					System.out.printf("%3d", world[i][j]);
-				}
-			}
-			System.out.println();
-		}
+		
 		int size = frontier.getSize();
 		System.out.println("frontier before loop: " + size);
 		for (int i = 0; i < size; i++) {
@@ -113,20 +97,45 @@ public class Graph {
 		System.out.println("frontier after loop: " + size);
 
 	}
-
+	public void printArrayWithNodes(byte[][] world,int distanceTraveled, int deltaHeightFromStart ) {
+	for (int i = 0; i < world.length; i++) {
+		for (int j = 0; j < world[0].length; j++) {
+			boolean node = false;
+			for (Node n : nodes) {
+				if (n.getRow() - deltaHeightFromStart == i && n.getCol() - distanceTraveled  == j) {
+					node = true;
+					break;
+				}
+			}
+			if (node) {
+				System.out.printf("%3c", 'N');
+			} else {
+				System.out.printf("%3d", world[i][j]);
+			}
+		}
+		System.out.println();
+	}
+	}
+	public void printArray(byte[][] world) {
+		for (int i = 0; i < world.length; i++) {
+			for (int j = 0; j < world[0].length; j++) {
+				
+					System.out.printf("%3d", world[i][j]);
+				
+			}
+			System.out.println();
+		}
+	}
 	public void findNeighbours(Node n, int row, int col, byte[][] world) {
+		System.out.println("finding neighbours: " + n + "at postion in array: row: " + row + " , col: " + col);
 		// row: row corresponding to n's position in world
-		// col: column corresponding to n's position in world
-
-		
-		 //int jumpHeight = jumpUpHeight(row, col,world); 
-		// int gapLength = gapAheadLength(n,world);
-		 
+		// col: column corresponding to n's position in world		 
 		if (col == world.length - 1) {
 			frontier.enqueue(n);
 			return;
 		} else if (freePassageAhead(row, col, world)) {
-			Node x = new Node(row, col + 1);
+			Node x = new Node(n.getRow(), n.getCol() + 1);
+			System.out.println("node created: " + x);
 			this.addNode(x);
 			findNeighbours(x, row, col + 1, world);
 			n.addEdge(x);
@@ -136,10 +145,9 @@ public class Graph {
 			n.addEdge(x);
 			this.addNode(x);
 		}*/ else if (jumpUpHeight(row, col,world) <= 4 && jumpUpHeight(row, col,world) != 0) {
-			System.out.println("row: " + row);
-			Node x = new Node(row + jumpUpHeight(row, col,world), col + 1);
+			Node x = new Node(n.getRow()- jumpUpHeight(row, col,world), n.getCol() + 1);
 			System.out.println("new node: " + x);
-			findNeighbours(x, x.getRow(), x.getCol(), world);
+			findNeighbours(x, row-jumpUpHeight(row, col,world), col+1, world);
 			n.addEdge(x);
 			this.addNode(x);
 		}
@@ -147,7 +155,7 @@ public class Graph {
 	}
 
 	private boolean freePassageAhead(int row, int col, byte[][] world) {
-
+		System.out.println("what is straight ahead: " + world[row][col + 1] );
 		return (world[row][col + 1] == 0 && world[row - 1][col + 1] == 0);
 	}
 
