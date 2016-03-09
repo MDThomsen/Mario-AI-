@@ -55,4 +55,7 @@ public class Queue<T> {
 		if(i == 0) return true;
 		else return false;
 	}
+	public int getSize(){
+		return i;
+	}
 }

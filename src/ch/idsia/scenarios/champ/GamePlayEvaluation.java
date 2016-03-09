@@ -61,11 +61,14 @@ public final class GamePlayEvaluation
         final Agent agent = new MyAgent();
    //     final Agent agent = new RandomAgent();
       //  final Agent agent = new MarioAI("SuperAgent");
+        //final Agent agent = new MarioAI("TestAgent");
 //        final Agent agent = cmdLineOptions.getAgent();
 //        final Agent agent = (SimpleCNAgent) Easy.load("sergeypolikarpov.xml");
 //        System.out.println("agent = " + agent);
         cmdLineOptions.setAgent(agent);
         final BasicTask basicTask = new BasicTask(cmdLineOptions);
+        
+        
         float fitness = 0;
         boolean verbose = false;
         int trials = 0;

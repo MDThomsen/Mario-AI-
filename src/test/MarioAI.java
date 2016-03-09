@@ -26,7 +26,7 @@ public class MarioAI extends BasicMarioAIAgent implements Agent {
 			
 			if((int) marioFloatPos[0]/16 != prevLength) {
 				
-				printWorld();
+				//printWorld();
 			}
 			prevLength = (int) marioFloatPos[0]/16;
 			

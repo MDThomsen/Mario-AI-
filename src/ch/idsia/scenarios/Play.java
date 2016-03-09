@@ -3,6 +3,7 @@ package ch.idsia.scenarios;
 import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.benchmark.tasks.MarioCustomSystemOfValues;
 import ch.idsia.tools.CmdLineOptions;
+import datastructures.Graph;
 
 import java.io.IOException; /**
  * Created by IntelliJ IDEA.
@@ -53,6 +54,7 @@ public static void main(String[] args)
     final MarioCustomSystemOfValues m = new MarioCustomSystemOfValues();
 //        basicTask.runOneEpisode();
     // run 1 episode with same options, each time giving output of Evaluation info.
+    
     basicTask.doEpisodes(1, false);
     System.out.println("\nEvaluationInfo: \n" + basicTask.getEnvironment().getEvaluationInfoAsString());
     System.out.println("\nCustom : \n" + basicTask.getEnvironment().getEvaluationInfo().computeWeightedFitness(m));

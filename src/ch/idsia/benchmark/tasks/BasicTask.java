@@ -41,7 +41,7 @@ public boolean runOneEpisode()
 
             boolean[] action = agent.getAction();
             environment.performAction(action);
-            //printArray(environment.getMergedObservationZZ(1, 0));
+           // printArray(environment.getMergedObservationZZ(1, 0));
         }
     }
     environment.closeRecorder();
