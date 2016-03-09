@@ -1,8 +1,8 @@
 package ch.idsia.scenarios.champ;
 
+import superAgent.MarioAI;
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.AgentsPool;
-import ch.idsia.agents.controllers.TestAI;
 import ch.idsia.agents.controllers.TimingAgent;
 import ch.idsia.benchmark.mario.simulation.SimulationOptions;
 import ch.idsia.benchmark.tasks.BasicTask;
@@ -39,14 +39,14 @@ public final class GamePlayEvaluation
 
         int levelLength = cmdLineOptions.getLevelLength();
 
-        final int[] timeLimits = new int[]{levelLength / 10,
+        final int[] timeLimits = new int[]{levelLength,
                 levelLength * 2 / 10,
                 levelLength * 4 / 10};
 
         final int[] levelDifficulties = new int[]{0, 1, 2, 3, 4, 5, 6, 12, 16, 20};
         final int[] levelTypes = new int[]{0, 1, 2};
         final int[] levelLengths = new int[]{320, 320, 320, 320, 320, 320};
-        final boolean[] creaturesEnables = new boolean[]{true};
+        final boolean[] creaturesEnables = new boolean[]{false};
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
@@ -54,7 +54,7 @@ public final class GamePlayEvaluation
         cmdLineOptions.setLevelRandSeed(seed);
 
 //        final Environment environment = new MarioEnvironment();
-        final Agent agent = new TestAI();
+        final Agent agent = new MarioAI("SuperAgent");
 //        final Agent agent = cmdLineOptions.getAgent();
 //        final Agent agent = (SimpleCNAgent) Easy.load("sergeypolikarpov.xml");
 //        System.out.println("agent = " + agent);
