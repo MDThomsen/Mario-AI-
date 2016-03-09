@@ -1,6 +1,5 @@
 package ch.idsia.scenarios.champ;
 
-import superAgent.MarioAI;
 import ch.idsia.agents.Agent;
 import ch.idsia.agents.AgentsPool;
 import ch.idsia.agents.controllers.TimingAgent;
@@ -9,6 +8,7 @@ import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.CmdLineOptions;
 import ch.idsia.tools.EvaluationInfo;
 import ch.idsia.utils.StatisticalSummary;
+import test.MarioAI;
 
 
 /**
@@ -51,6 +51,7 @@ public final class GamePlayEvaluation
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
         int seed = (int) (1000000*Math.random());
+//        int seed = 970836;
         cmdLineOptions.setLevelRandSeed(seed);
 
 //        final Environment environment = new MarioEnvironment();
@@ -65,6 +66,7 @@ public final class GamePlayEvaluation
         int trials = 0;
         int disqualifications = 0;
 
+        System.out.println("Level generator seed = " + seed);
         for (int ll : levelLengths)
 
             for (int levelDifficulty : levelDifficulties)
@@ -106,7 +108,6 @@ public final class GamePlayEvaluation
         System.out.println("trials = " + trials);
         System.out.println("disqualifications = " + disqualifications);
         System.out.println("GamePlayEvaluation final score = " + fitness);
-
 //        EvaluationInfo evaluationInfo = new EvaluationInfo(environment.getEvaluationInfoAsFloats());
 //        System.out.println("evaluationInfo = " + evaluationInfo);
         System.exit(0);
