@@ -9,7 +9,7 @@ import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.CmdLineOptions;
 import ch.idsia.tools.EvaluationInfo;
 import ch.idsia.utils.StatisticalSummary;
-import superAgent.MarioAI;
+import test.MarioAI;
 
 
 /**
@@ -47,14 +47,14 @@ public final class GamePlayEvaluation
         final int[] levelDifficulties = new int[]{0, 1, 2, 3, 4, 5, 6, 12, 16, 20};
         final int[] levelTypes = new int[]{0, 1, 2};
         final int[] levelLengths = new int[]{320, 320, 320, 320, 320, 320};
-        final boolean[] creaturesEnables = new boolean[]{true, true};
+        final boolean[] creaturesEnables = new boolean[]{false};
         int levelSeed = cmdLineOptions.getLevelRandSeed();
 //        cmdLineOptions.setVisualization(false);
 //        cmdLineOptions.setFPS(100);
 //        cmdLineOptions.setLevelRandSeed(6189642);
         int seed = (int) (Math.random() * 1000000);
+//        int seed = 970836;
         cmdLineOptions.setLevelRandSeed(seed);
-        System.out.println(seed);
 
 //        final Environment environment = new MarioEnvironment();
         final Agent agent = new MarioAI("SuperAgent");
@@ -68,6 +68,7 @@ public final class GamePlayEvaluation
         int trials = 0;
         int disqualifications = 0;
 
+        System.out.println("Level generator seed = " + seed);
         for (int ll : levelLengths)
 
             for (int levelDifficulty : levelDifficulties)
@@ -108,7 +109,6 @@ public final class GamePlayEvaluation
         System.out.println("trials = " + trials);
         System.out.println("disqualifications = " + disqualifications);
         System.out.println("GamePlayEvaluation final score = " + fitness);
-
 //        EvaluationInfo evaluationInfo = new EvaluationInfo(environment.getEvaluationInfoAsFloats());
 //        System.out.println("evaluationInfo = " + evaluationInfo);
         System.exit(0);
