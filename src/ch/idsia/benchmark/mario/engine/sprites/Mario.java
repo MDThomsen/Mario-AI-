@@ -23,6 +23,7 @@ public static final int KEY_UP = 5;
 public static final int STATUS_RUNNING = 2;
 public static final int STATUS_WIN = 1;
 public static final int STATUS_DEAD = 0;
+private static final int MAX_FIREBALL_ON_SCREEN = 10;
 
 private static float marioGravity;
 
@@ -346,7 +347,7 @@ public void move()
         sliding = false;
     }
 
-    if (keys[KEY_SPEED] && canShoot && Mario.fire && levelScene.fireballsOnScreen < 2)
+    if (keys[KEY_SPEED] && canShoot && Mario.fire && levelScene.fireballsOnScreen < MAX_FIREBALL_ON_SCREEN)
     {
         levelScene.addSprite(new Fireball(levelScene, x + facing * 6, y - 20, facing));
     }

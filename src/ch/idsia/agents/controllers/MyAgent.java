@@ -62,7 +62,7 @@ public class MyAgent extends BasicMarioAIAgent implements Agent {
 	private boolean gapAhead() {
 		boolean gap = true;
 		for(int i=(mergedObservation.length) / 2; i < mergedObservation.length; i++) {
-			if (mergedObservation[i][(mergedObservation.length) / 2 +1 ] != 0) {
+			if (mergedObservation[i][mergedObservation.length / 2 +1 ] != 0) {
 				gap = false;
 			}
 		}

@@ -60,6 +60,7 @@ public final class GamePlayEvaluation
 //        final Environment environment = new MarioEnvironment();
         final Agent agent = new MyAgent();
    //     final Agent agent = new RandomAgent();
+      //  final Agent agent = new MarioAI("SuperAgent");
 //        final Agent agent = cmdLineOptions.getAgent();
 //        final Agent agent = (SimpleCNAgent) Easy.load("sergeypolikarpov.xml");
 //        System.out.println("agent = " + agent);
