@@ -31,7 +31,7 @@ public class MarioAI extends BasicMarioAIAgent implements Agent {
 				
 				tg.generateGraph(mergedObservation);
 				tg.printGraph(tg.getStartNode());
-				printWorld();
+				//printWorld();
 			}
 			prevLength = (int) marioFloatPos[0]/16;
 			
